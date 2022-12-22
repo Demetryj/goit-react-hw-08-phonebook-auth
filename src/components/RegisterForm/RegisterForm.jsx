@@ -3,6 +3,7 @@ import { useAuthorizationUserMutation } from 'redux/authSlice';
 
 export const RegisterForm = () => {
   const [autorizationUser, result] = useAuthorizationUserMutation();
+  console.log(result);
 
   const handleSubmit = event => {
     event.preventDefault();
