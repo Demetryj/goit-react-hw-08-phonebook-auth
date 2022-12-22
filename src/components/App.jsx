@@ -1,23 +1,22 @@
-import { useGetContactsQuery } from 'redux/contactsSlice';
-import { Forma } from 'components/Forma';
-import { ListContacts } from 'components/ListContacts';
-import { Filter } from 'components/Filter';
-import { Box } from './Box';
-import { Title, TitleContacts } from './Titles/TitlesStyled';
-import { Loader } from 'components/Loader';
+import { lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from './Layout';
+
+const HomePage = lazy(() => import('pages/Home'));
+const ContactsPage = lazy(() => import('pages/UserContacts'));
+const AuthorizationPage = lazy(() => import('pages/Authorization'));
+const LoginPage = lazy(() => import('pages/Login'));
 
 export const App = () => {
-  const { data: contacts = [], error, isLoading } = useGetContactsQuery();
-
   return (
-    <Box p={[4]}>
-      <Title>Phonebook</Title>
-      <Forma />
-      <TitleContacts>Contacts</TitleContacts>
-      <Filter />
-      {!isLoading && error && <p>{error}</p>}
-      {contacts.length > 0 && !error && <ListContacts />}
-      {isLoading && <Loader />}
-    </Box>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="contacts" element={<ContactsPage />} />
+        <Route path="register" element={<AuthorizationPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Route>
+    </Routes>
   );
 };
