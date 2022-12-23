@@ -3,7 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import {
   useAddContactMutation,
   useGetContactsQuery,
-} from 'redux/contactsSlice';
+} from 'redux/contacts/contactsSlice';
 import { Form, Label, Input, Button } from './FormaStyled';
 
 export const Forma = () => {

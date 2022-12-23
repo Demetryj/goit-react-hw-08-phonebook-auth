@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from 'redux/contactsSlice';
+import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
 import { Text, Button, Circle } from './ElementListContactsStyled';
 
 export const ElementListContacts = ({ id, name, phone }) => {

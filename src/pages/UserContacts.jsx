@@ -1,4 +1,4 @@
-import { useGetContactsQuery } from 'redux/contactsSlice';
+import { useGetContactsQuery } from 'redux/contacts/contactsSlice';
 import { Forma } from 'components/Forma';
 import { ListContacts } from 'components/ListContacts';
 import { Filter } from 'components/Filter';
