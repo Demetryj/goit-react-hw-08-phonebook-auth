@@ -1,16 +1,28 @@
 import styled from 'styled-components';
 
 export const Circle = styled.span`
-  margin-right: ${props => props.theme.space[3]}px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
 
-  width: 7px;
-  height: 7px;
+  font-family: ${props => props.theme.fonts.body};
+  font-size: ${props => props.theme.fontSizes.xm};
+  font-weight: ${props => props.theme.fontWeights.medium};
+  line-height: 2.3;
+
+  border: ${props => props.theme.borders.normal};
   border-radius: ${props => props.theme.radii.round};
-  background-color: ${props => props.theme.colors.black};
+  border-color: ${props => props.theme.colors.borderAvatar};
+
+  background-color: ${props => props.getColor};
+  color: ${props => props.theme.colors.avatarLetters};
 `;
 
-export const Text = styled.p`
-  margin-right: ${props => props.theme.space[5]}px;
+export const WprapperText = styled.div`
+  max-width: 80%;
+  flex-grow: 1;
+
+  word-break: break-word;
 
   font-family: ${props => props.theme.fonts.body};
   font-size: ${props => props.theme.fontSizes.m};
@@ -19,15 +31,15 @@ export const Text = styled.p`
   color: ${props => props.theme.colors.primaryText};
 `;
 
+export const DataUser = styled.span`
+  display: block;
+`;
+
 export const Button = styled.button`
   padding-top: ${props => props.theme.space[2]}px;
   padding-bottom: ${props => props.theme.space[2]}px;
   padding-left: ${props => props.theme.space[3]}px;
   padding-right: ${props => props.theme.space[3]}px;
-
-  font-family: inherit;
-  font-weight: ${props => props.theme.fontWeights.body};
-  font-size: ${props => props.theme.fontSizes.s};
 
   background-color: ${props => props.theme.colors.backgroundBtn};
 
@@ -39,9 +51,15 @@ export const Button = styled.button`
   cursor: pointer;
   transition: color 250ms, background-color 250ms;
 
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
   &:hover,
   &:focus {
     color: ${props => props.theme.colors.white};
-    background-color: ${props => props.theme.colors.backgroundAccentDeleteBtn};
+    background-color: ${props =>
+      props.delete ? props.theme.colors.red : props.theme.colors.green};
   }
 `;

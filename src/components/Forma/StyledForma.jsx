@@ -4,13 +4,15 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.space[4]}px;
-  margin-bottom: ${props => props.theme.space[5]}px;
+  margin-bottom: ${props => props.theme.space[4]}px;
   padding: ${props => props.theme.space[3]}px;
-  width: 500px;
+  width: 350px;
 
   border: ${props => props.theme.borders.normal};
   border-radius: ${props => props.theme.radii.normal};
   border-color: ${props => props.theme.colors.borderColor};
+
+  box-shadow: ${props => props.theme.shadows.second};
 `;
 
 export const Label = styled.label`

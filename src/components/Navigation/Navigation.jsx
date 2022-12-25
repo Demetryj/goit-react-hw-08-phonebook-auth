@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Wrapper } from './NavigationStyles';
+import { Wrapper } from './StylesNavigation';
 
 export const Navigation = () => {
   return (

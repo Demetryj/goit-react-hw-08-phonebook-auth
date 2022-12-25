@@ -4,11 +4,11 @@ import {
   useAddContactMutation,
   useGetContactsQuery,
 } from 'redux/contacts/contactsSlice';
-import { Form, Label, Input, Button } from './FormaStyled';
+import { Form, Label, Input, Button } from './StyledForma';
 
 export const Forma = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const { data: contacts } = useGetContactsQuery();
   const [addContact, { error }] = useAddContactMutation();
@@ -20,7 +20,7 @@ export const Forma = () => {
         setName(value);
         break;
       case 'phone':
-        setPhone(value);
+        setNumber(value);
         break;
 
       default:
@@ -38,7 +38,7 @@ export const Forma = () => {
       return;
     }
 
-    addContact({ name, phone });
+    addContact({ name, number });
 
     if (error) {
       toast.error(`${name} not added`);
@@ -46,7 +46,7 @@ export const Forma = () => {
     toast.success(`${name} added to contacts`);
 
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -72,7 +72,7 @@ export const Forma = () => {
           id="telId"
           type="tel"
           name="phone"
-          value={phone}
+          value={number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

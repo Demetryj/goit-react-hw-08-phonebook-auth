@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { logIn } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
 import { Box } from 'components/Box';
-import { Form } from './LoginFormStyled';
+import { Form } from './StyledLoginForm';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');

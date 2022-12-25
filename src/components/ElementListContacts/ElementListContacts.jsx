@@ -1,10 +1,22 @@
+import { useMemo } from 'react';
 import toast from 'react-hot-toast';
 import PropTypes from 'prop-types';
+import { MdDeleteForever } from 'react-icons/md';
+import { TfiWrite } from 'react-icons/tfi';
 import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
-import { Text, Button, Circle } from './ElementListContactsStyled';
+import { getFirstLetters } from 'utils/getFirstLetters';
+import { getRandomColor } from 'utils/getRandomColor';
+import {
+  WprapperText,
+  DataUser,
+  Button,
+  Circle,
+} from './StyledElementListContacts';
 
-export const ElementListContacts = ({ id, name, phone }) => {
+export const ElementListContacts = ({ id, name, number }) => {
   const [deleteContact, { error }] = useDeleteContactMutation();
+
+  const initContact = getFirstLetters(name).toUpperCase();
 
   const handleDelete = () => {
     deleteContact(id);
@@ -16,14 +28,20 @@ export const ElementListContacts = ({ id, name, phone }) => {
     toast.success(`${name} deleted from contacts`);
   };
 
+  const randomColor = useMemo(() => getRandomColor(), []);
+
   return (
     <>
-      <Circle></Circle>
-      <Text>
-        {name}: {phone}
-      </Text>
-      <Button type="button" onClick={handleDelete}>
-        Delete
+      <Circle getColor={randomColor}>{initContact}</Circle>
+      <WprapperText>
+        <DataUser>{name}</DataUser>
+        <DataUser>{number}</DataUser>
+      </WprapperText>
+      <Button type="button">
+        <TfiWrite />
+      </Button>
+      <Button type="button" onClick={handleDelete} delete>
+        <MdDeleteForever />
       </Button>
     </>
   );
@@ -32,5 +50,5 @@ export const ElementListContacts = ({ id, name, phone }) => {
 ElementListContacts.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };

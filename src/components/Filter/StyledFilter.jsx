@@ -1,10 +1,22 @@
 import styled from 'styled-components';
 
+export const WrapperFilter = styled.div`
+  margin-bottom: ${props => props.theme.space[4]}px;
+  padding: ${props => props.theme.space[3]}px;
+  width: 350px;
+
+  border: ${props => props.theme.borders.normal};
+  border-radius: ${props => props.theme.radii.normal};
+  border-color: ${props => props.theme.colors.borderColor};
+
+  box-shadow: ${props => props.theme.shadows.second};
+`;
+
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
 
-  margin-bottom: ${props => props.theme.space[2]}px;
+  /* margin-bottom: ${props => props.theme.space[2]}px; */
 
   font-family: ${props => props.theme.fonts.body};
   font-size: ${props => props.theme.fontSizes.m};
