@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const WrapperListContacts = styled.div`
+  position: relative;
   width: 50%;
   height: 350px;
 
@@ -9,6 +10,18 @@ export const WrapperListContacts = styled.div`
   border-color: ${props => props.theme.colors.borderColor};
 
   box-shadow: ${props => props.theme.shadows.second};
+`;
+
+export const Text = styled.p`
+  margin-top: ${props => props.theme.space[2]}px;
+
+  font-family: ${props => props.theme.fonts.body};
+  font-size: ${props => props.theme.fontSizes.m};
+  font-weight: ${props => props.theme.fontWeights.bold};
+  line-height: ${props => props.theme.lineHeights.body};
+  color: ${props => props.theme.colors.primaryText};
+
+  text-align: center;
 `;
 
 export const List = styled.ul`

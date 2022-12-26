@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Forma } from 'components/Forma';
 import { ListContacts } from 'components/ListContacts';
 import { Filter } from 'components/Filter';
@@ -11,6 +12,7 @@ const UserContacts = () => {
         <Filter />
         <ListContacts />
       </Box>
+      <Toaster />
     </main>
   );
 };

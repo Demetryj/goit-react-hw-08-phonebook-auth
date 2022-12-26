@@ -18,7 +18,7 @@ export const Circle = styled.span`
   color: ${props => props.theme.colors.avatarLetters};
 `;
 
-export const WprapperText = styled.div`
+export const Wprapper = styled.div`
   max-width: 80%;
   flex-grow: 1;
 

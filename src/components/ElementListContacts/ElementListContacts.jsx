@@ -7,14 +7,14 @@ import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
 import { getFirstLetters } from 'utils/getFirstLetters';
 import { getRandomColor } from 'utils/getRandomColor';
 import {
-  WprapperText,
+  Wprapper,
   DataUser,
   Button,
   Circle,
 } from './StyledElementListContacts';
 
 export const ElementListContacts = ({ id, name, number }) => {
-  const [deleteContact, { error }] = useDeleteContactMutation();
+  const [deleteContact, { error, isLoading }] = useDeleteContactMutation();
 
   const initContact = getFirstLetters(name).toUpperCase();
 
@@ -25,7 +25,7 @@ export const ElementListContacts = ({ id, name, number }) => {
       toast.error(`${name} not deleted`);
     }
 
-    toast.success(`${name} deleted from contacts`);
+    // toast.success(`${name} deleted from contacts`);
   };
 
   const randomColor = useMemo(() => getRandomColor(), []);
@@ -33,14 +33,14 @@ export const ElementListContacts = ({ id, name, number }) => {
   return (
     <>
       <Circle getColor={randomColor}>{initContact}</Circle>
-      <WprapperText>
+      <Wprapper>
         <DataUser>{name}</DataUser>
         <DataUser>{number}</DataUser>
-      </WprapperText>
-      <Button type="button">
+      </Wprapper>
+      <Button type="button" onClick={() => {}} disabled={isLoading}>
         <TfiWrite />
       </Button>
-      <Button type="button" onClick={handleDelete} delete>
+      <Button type="button" onClick={handleDelete} delete disabled={isLoading}>
         <MdDeleteForever />
       </Button>
     </>

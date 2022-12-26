@@ -1,8 +1,7 @@
-import { MainTitle } from 'components/Titles';
 const Home = () => {
   return (
     <main>
-      <MainTitle>PHONEBOOK</MainTitle>
+      <h1>PHONEBOOK</h1>
     </main>
   );
 };

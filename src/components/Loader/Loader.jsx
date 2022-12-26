@@ -10,11 +10,8 @@ export const Loader = () => {
       ariaLabel="three-dots-loading"
       wrapperStyle={{
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transitionTransform: '(-50%, -50%)',
+        left: '40%',
       }}
-      wrapperClassName=""
       visible={true}
     />
   );

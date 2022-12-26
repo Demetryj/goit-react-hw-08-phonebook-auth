@@ -104,7 +104,7 @@ export const RegisterForm = () => {
           </button>
         </form>
       </Box>
-      <Toaster />
+      {/* <Toaster /> */}
     </main>
   );
 };

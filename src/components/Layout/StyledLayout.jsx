@@ -5,7 +5,6 @@ export const Container = styled.div`
   max-width: 1200px;
   height: 100vh;
   margin: ${props => props.theme.space[0]}px auto;
-  /* padding: ${props => props.theme.space[0]}px 16px; */
 
   background-image: linear-gradient(
       to right,

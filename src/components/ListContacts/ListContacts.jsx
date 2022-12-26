@@ -1,5 +1,10 @@
 import { ElementListContacts } from 'components/ElementListContacts';
-import { WrapperListContacts, List, ElementList } from './StyledListContacts';
+import {
+  WrapperListContacts,
+  Text,
+  List,
+  ElementList,
+} from './StyledListContacts';
 import { useGetContactsQuery } from 'redux/contacts/contactsSlice';
 import { selectFilterValue } from 'redux/filter/selectors';
 import { useSelector } from 'react-redux';
@@ -9,6 +14,7 @@ export const ListContacts = () => {
   const { data: contacts = [], error, isLoading } = useGetContactsQuery();
 
   //useMemo
+
   const filterValue = useSelector(selectFilterValue);
   const normalyzeFilter = filterValue.toLowerCase();
 
@@ -18,7 +24,9 @@ export const ListContacts = () => {
 
   return (
     <WrapperListContacts>
-      {contacts.length > 0 && !error && !isLoading ? (
+      {error && <p>{error.message}</p>}
+
+      {contacts.length > 0 && !error && !isLoading && (
         <List>
           {visibleContacts.map(({ name, number, id }) => (
             <ElementList key={id}>
@@ -26,9 +34,12 @@ export const ListContacts = () => {
             </ElementList>
           ))}
         </List>
-      ) : (
-        <p>{error}</p>
       )}
+
+      {contacts.length === 0 && !error && !isLoading && (
+        <Text>No contacts</Text>
+      )}
+
       {isLoading && <Loader />}
     </WrapperListContacts>
   );

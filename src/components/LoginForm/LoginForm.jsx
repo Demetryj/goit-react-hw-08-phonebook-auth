@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { logIn } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
 import { Box } from 'components/Box';
@@ -87,7 +87,7 @@ export const LoginForm = () => {
           </button>
         </Form>
       </Box>
-      <Toaster />
+      {/* <Toaster /> */}
     </main>
   );
 };

@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import {
   useAddContactMutation,
   useGetContactsQuery,
 } from 'redux/contacts/contactsSlice';
-import { Form, Label, Input, Button } from './StyledForma';
+import { Button } from 'components/Button';
+import { Form, Label, Input } from './StyledForma';
 
 export const Forma = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const { data: contacts } = useGetContactsQuery();
-  const [addContact, { error }] = useAddContactMutation();
+  const [addContact, { error, isLoading }] = useAddContactMutation();
 
   const handleChangeInput = event => {
     const { name, value } = event.target;
@@ -41,9 +42,9 @@ export const Forma = () => {
     addContact({ name, number });
 
     if (error) {
-      toast.error(`${name} not added`);
+      toast.error(`Error! ${name} not added`);
     }
-    toast.success(`${name} added to contacts`);
+    // toast.success(`${name} added to contacts`);
 
     setName('');
     setNumber('');
@@ -81,8 +82,7 @@ export const Forma = () => {
         />
       </Label>
 
-      <Button type="submit">Add contact</Button>
-      <Toaster />
+      <Button disabled={isLoading}>Add contact</Button>
     </Form>
   );
 };
