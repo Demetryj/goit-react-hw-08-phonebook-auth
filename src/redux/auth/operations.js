@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -19,6 +20,7 @@ export const authorization = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+      toast.error('You entered incorrect data. Try entering other data.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -32,7 +34,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      alert('00000000000000000');
+      toast.error('You entered incorrect data. Try entering other data.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -1,11 +1,10 @@
-import { NavLink } from 'react-router-dom';
-import { Wrapper } from './StylesNavigation';
+import { Wrapper, LinkMenu } from './StylesNavigation';
 
 export const Navigation = () => {
   return (
     <Wrapper>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="contacts">Contacts</NavLink>
+      <LinkMenu to="/">Home</LinkMenu>
+      <LinkMenu to="contacts">Contacts</LinkMenu>
     </Wrapper>
   );
 };

@@ -19,8 +19,8 @@ export const Btn = styled.button`
   cursor: pointer;
   transition: color 250ms, background-color 250ms;
 
-  &:hover,
-  &:focus {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     color: ${props => props.theme.colors.white};
     background-color: ${props => props.theme.colors.backgroundAccentBtn};
   }

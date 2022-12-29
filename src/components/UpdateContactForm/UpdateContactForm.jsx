@@ -1,18 +1,23 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
-import {
-  useAddContactMutation,
-  useGetContactsQuery,
-} from 'redux/contacts/contactsSlice';
+import PropTypes from 'prop-types';
+import { updateContact } from 'redux/contacts/operations';
+import { useContacts } from 'hooks/useContacts';
 import { Button } from 'components/Button';
-import { Form, Label, Input } from './StyledForma';
+import { Form, Label, Input } from './StyledUpdateContactForm';
 
-export const Forma = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export const UpdateContactForm = ({
+  contactId,
+  contactName,
+  contactNumber,
+  closeModal,
+}) => {
+  const { isLoading, error } = useContacts();
 
-  const { data: contacts } = useGetContactsQuery();
-  const [addContact, { error, isLoading }] = useAddContactMutation();
+  const [name, setName] = useState(contactName);
+  const [number, setNumber] = useState(contactNumber);
+  const dispatch = useDispatch();
 
   const handleChangeInput = event => {
     const { name, value } = event.target;
@@ -31,24 +36,20 @@ export const Forma = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    setName(name);
+    setNumber(number);
 
-    const searchedContact = contacts.find(contact => contact.name === name);
+    dispatch(updateContact({ contactId, name, number }));
 
-    if (searchedContact) {
-      toast.error(`${searchedContact.name} is already in contacts`);
-      return;
-    }
-
-    addContact({ name, number });
+    closeModal();
 
     if (error) {
-      toast.error(`Error! ${name} not added`);
+      toast.error('Something happened. Please try again later');
     }
-    // toast.success(`${name} added to contacts`);
-
-    setName('');
-    setNumber('');
+    toast.success(`Update contact ${name} `);
   };
+
+  const clearInput = name === '' || number === '';
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -82,7 +83,14 @@ export const Forma = () => {
         />
       </Label>
 
-      <Button disabled={isLoading}>Add contact</Button>
+      <Button disabled={isLoading || clearInput}>Update contact</Button>
     </Form>
   );
+};
+
+UpdateContactForm.propTypes = {
+  contactId: PropTypes.string.isRequired,
+  contactName: PropTypes.string.isRequired,
+  contactNumber: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };

@@ -1,21 +1,17 @@
 export const theme = {
   colors: {
     primaryText: 'rgb(42, 42, 42)',
-    secondaryText: 'rgb(134 131 131)', //
-    backgroundMain: '#fff', //
-    backgroundBody: 'rgba(110, 160, 163, 0.52)', //
     backgroundAccentBtn: 'rgba(11, 38, 222)',
-    // backgroundAccentDeleteBtn: 'rgba(255, 0, 0)',
     backgroundBtn: 'rgba(84, 101, 221, 0.7)',
     backgroundScroll: 'rgba(84, 101, 221, 0.7)',
+    backgroundBtnHeader: 'rgb(78, 152, 221, 1)',
+    backgroundModalOverlay: 'rgb(207, 207, 213, 1)',
     borderAvatar: 'rgba(84, 101, 221, 0.7)',
     avatarLetters: 'rgb(2, 2, 45)',
     scroll: 'rgb(125, 125, 139)',
-    loading: 'rgba(11, 38, 222)', //
     accent: 'rgba(37, 40, 239, 0.685)',
     red: 'rgba(255, 0, 0)',
-    white: 'white',
-    green: 'rgb(2, 92, 2)', //
+    white: 'rgb(255, 255, 255)',
     black: '#2a2a2a',
     borderColor: 'rgba(86, 89, 89, 0.52)',
   },
@@ -30,7 +26,7 @@ export const theme = {
   fontSizes: {
     xs: '12px',
     s: '14px',
-    m: '16px', //m
+    m: '16px',
     xm: '18px',
     l: '24px',
     xl: '32px',

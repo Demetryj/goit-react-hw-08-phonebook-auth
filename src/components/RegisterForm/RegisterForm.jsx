@@ -1,27 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
 import { authorization } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
+import { Button } from 'components/Button';
 import { Box } from 'components/Box';
+import { Form, Label, Input } from './StyledRegisterForm';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const { error, isLoading } = useAuth();
+  const { isLoading } = useAuth();
 
-  useEffect(() => {
-    if (name === '' && email === '' && password === '') {
-      return;
-    }
-
-    if (error && isLoading) {
-      toast.error('You entered incorrect data. Try entering other data.');
-      return;
-    }
-  }, [name, email, error, password, isLoading]);
   const handleAuthorization = event => {
     event.preventDefault();
 
@@ -57,54 +48,49 @@ export const RegisterForm = () => {
   const clearInputValue = name === '' || email === '' || password === '';
 
   return (
-    <main>
-      <Box p={[4]} as="div">
-        <form onSubmit={handleAuthorization}>
-          <label htmlFor="nameId">
-            Username
-            <input
-              id="nameId"
-              type="text"
-              name="name"
-              value={name}
-              required
-              placeholder=" "
-              onChange={handleChangeInputValue}
-            />
-          </label>
+    <Form onSubmit={handleAuthorization}>
+      <Label htmlFor="nameId">
+        Username
+        <Input
+          id="nameId"
+          type="text"
+          name="name"
+          value={name}
+          required
+          placeholder=" "
+          onChange={handleChangeInputValue}
+        />
+      </Label>
 
-          <label htmlFor="emailId">
-            Email
-            <input
-              id="emailId"
-              type="email"
-              name="email"
-              value={email}
-              required
-              placeholder=" "
-              onChange={handleChangeInputValue}
-            />
-          </label>
+      <Label htmlFor="emailId">
+        Email
+        <Input
+          id="emailId"
+          type="email"
+          name="email"
+          value={email}
+          required
+          placeholder=" "
+          onChange={handleChangeInputValue}
+        />
+      </Label>
 
-          <label htmlFor="passwordId">
-            Password
-            <input
-              id="passwordId"
-              type="password"
-              name="password"
-              value={password}
-              required
-              placeholder=" "
-              onChange={handleChangeInputValue}
-            />
-          </label>
+      <Label htmlFor="passwordId">
+        Password
+        <Input
+          id="passwordId"
+          type="password"
+          name="password"
+          value={password}
+          required
+          placeholder=" "
+          onChange={handleChangeInputValue}
+        />
+      </Label>
 
-          <button type="submit" disabled={clearInputValue || isLoading}>
-            {isLoading ? '00000' : 'Authorization'}
-          </button>
-        </form>
+      <Box mx="auto" as="div">
+        <Button disabled={clearInputValue || isLoading}>Authorization</Button>
       </Box>
-      {/* <Toaster /> */}
-    </main>
+    </Form>
   );
 };

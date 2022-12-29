@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-export const WrapperFilter = styled.div`
-  margin-bottom: ${props => props.theme.space[4]}px;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.space[4]}px;
   padding: ${props => props.theme.space[3]}px;
   width: 350px;
+  height: 195px;
 
   border: ${props => props.theme.borders.normal};
   border-radius: ${props => props.theme.radii.normal};
@@ -21,6 +24,8 @@ export const Label = styled.label`
   font-weight: ${props => props.theme.fontWeights.bold};
   line-height: ${props => props.theme.lineHeights.body};
   color: ${props => props.theme.colors.primaryText};
+
+  cursor: pointer;
 
   &:focus-within {
     color: ${props => props.theme.colors.accent};

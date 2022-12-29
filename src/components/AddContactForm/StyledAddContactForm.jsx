@@ -4,9 +4,9 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${props => props.theme.space[4]}px;
-  margin-bottom: ${props => props.theme.space[4]}px;
   padding: ${props => props.theme.space[3]}px;
   width: 350px;
+  height: 195px;
 
   border: ${props => props.theme.borders.normal};
   border-radius: ${props => props.theme.radii.normal};
@@ -18,8 +18,6 @@ export const Form = styled.form`
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-
-  margin-bottom: ${props => props.theme.space[2]}px;
 
   font-family: ${props => props.theme.fonts.body};
   font-size: ${props => props.theme.fontSizes.m};
@@ -36,7 +34,6 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   padding: ${props => props.theme.space[2]}px;
-  width: 300px;
 
   font-family: inherit;
   font-weight: ${props => props.theme.fontWeights.body};

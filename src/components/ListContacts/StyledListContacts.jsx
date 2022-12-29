@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const WrapperListContacts = styled.div`
   position: relative;
-  width: 50%;
-  height: 350px;
+  width: 600px;
+  height: 520px;
 
   border: ${props => props.theme.borders.normal};
   border-radius: ${props => props.theme.radii.normal};

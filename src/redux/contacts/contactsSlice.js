@@ -1,57 +1,78 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  getContacts,
+  addContact,
+  deleteContact,
+  updateContact,
+} from './operations';
+import { logOut } from 'redux/auth/operations';
 
-const axiosBaseQuery =
-  ({ baseUrl } = { baseUrl: '' }) =>
-  async ({ url, method, data, params }) => {
-    try {
-      const result = await axios({ url: baseUrl + url, method, data, params });
-      return { data: result.data };
-    } catch (axiosError) {
-      let err = axiosError;
-      return {
-        error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
-        },
-      };
-    }
-  };
+const initialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+};
 
-export const contactsApi = createApi({
-  reducerPath: 'contacts',
-  baseQuery: axiosBaseQuery({
-    baseUrl: 'https://connections-api.herokuapp.com',
-  }),
-  tagTypes: ['Contacts'],
-  endpoints: builder => ({
-    getContacts: builder.query({
-      query: () => ({
-        url: '/contacts',
-        method: 'GET',
-      }),
-      providesTags: ['Contacts'],
-    }),
-    addContact: builder.mutation({
-      query: contact => ({
-        url: '/contacts',
-        method: 'POST',
-        data: contact,
-      }),
-      invalidatesTags: ['Contacts'],
-    }),
-    deleteContact: builder.mutation({
-      query: id => ({
-        url: `/contacts/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: ['Contacts'],
-    }),
-  }),
+const handlePending = state => {
+  state.isLoading = true;
+};
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
+
+const contactSlice = createSlice({
+  name: 'contacts',
+  initialState,
+  extraReducers: builder => {
+    builder
+      .addCase(getContacts.pending, handlePending)
+      .addCase(getContacts.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(getContacts.rejected, handleRejected)
+
+      .addCase(addContact.pending, handlePending)
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addContact.rejected, handleRejected)
+
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+
+        const index = state.items.findIndex(
+          contact => contact.id === action.payload.id
+        );
+
+        state.items.splice(index, 1);
+      })
+      .addCase(deleteContact.rejected, handleRejected)
+
+      .addCase(updateContact.pending, handlePending)
+      .addCase(updateContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const updatedContact = state.items.find(
+          contact => contact.id === action.payload.id
+        );
+        updatedContact.name = action.payload.name;
+        updatedContact.number = action.payload.number;
+      })
+      .addCase(updateContact.rejected, handleRejected)
+
+      .addCase(logOut.fulfilled, state => {
+        state.items = [];
+        state.isLoading = false;
+        state.error = null;
+      });
+  },
 });
 
-export const {
-  useGetContactsQuery,
-  useAddContactMutation,
-  useDeleteContactMutation,
-} = contactsApi;
+export const contactsReducer = contactSlice.reducer;
